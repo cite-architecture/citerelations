@@ -9,17 +9,38 @@ import scala.collection.mutable.ArrayBuffer
 
 case class CiteRelationSet (relations: Set[CiteTriple]) {
 
+
+  /** Find number of relations in set.
+  */
+  def size: Int = {
+    relations.size
+  }
+
+  /** Filter set for subject URN matching a given URN.
+  *
+  * @param u URN to match (either a CTS or CITE2 URN).
+  */
   def urn1Match(u: Urn) : CiteRelationSet = {
     val matchingRelations = relations.filter(_.urn1Match(u))
     CiteRelationSet(matchingRelations)
   }
+
+  /** Filter set for object URN matching a given URN.
+  *
+  * @param u URN to match (either a CTS or CITE2 URN).
+  */
   def urn2Match(u: Urn) : CiteRelationSet = {
     val matchingRelations = relations.filter(_.urn2Match(u))
     CiteRelationSet(matchingRelations)
   }
 
 
-  def urnMatch(u: Urn) : CiteRelationSet = {
+  /** Filter set for triplet matching a given URN
+  * (subject or object).
+  *
+  * @param u URN to match.
+  */
+  def ~~(u: Urn) : CiteRelationSet = {
     val matchingRelations = relations.filter(_ ~~ u)
     CiteRelationSet(matchingRelations)
   }
@@ -27,6 +48,9 @@ case class CiteRelationSet (relations: Set[CiteTriple]) {
 }
 
 
+/** Factory for creating [[CiteRelationSet]] from Source
+* data in CEX format.
+*/
 object CiteRelationSet {
 
   /** Create set from CEX source string.
@@ -38,16 +62,6 @@ object CiteRelationSet {
     val relations = lns.map(v => CiteTriple(urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2))) )
     CiteRelationSet(relations.toSet)
   }
-/*
-
-  def apply(f: String, separator: String = "\t"): CiteRelationSet = {
-    val stringPairs = Source.fromFile(f).getLines.toVector.map(_.split(separator))
-
-    val relations = stringPairs.tail.map( arr => CiteTriple(urnFromString(arr(0)), Cite2Urn(arr(1)), urnFromString(arr(2))) )
-    CiteRelationSet(relations.toSet)
-  }
-*/
-
 
 
 }

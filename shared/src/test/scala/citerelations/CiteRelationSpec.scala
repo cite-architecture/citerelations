@@ -15,7 +15,7 @@ urn:cts:greekLit:tlg0012.tlg001.msA:1.1#urn:cite2:cite:dseverbs.r1:appearsOn#urn
   "A CITE relation set" should "offer a constructor signature for instantiating a corpus from a delimited text file" in  {
     val relations = CiteRelationSet(cexSrc)
     relations match {
-      case crset: CiteRelationSet => assert(true)
+      case crset: CiteRelationSet => assert(crset.size == 2)
       case _ => fail("Should have created CiteRelationSet")
     }
   }
