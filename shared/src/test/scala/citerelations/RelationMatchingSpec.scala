@@ -43,6 +43,8 @@ class RelationMatchingSpec extends FlatSpec {
     assert (triple ~~ matchImg)
   }
 
+
+// Loading from file is JVM specifics
   it should "filter a relation set by CTS URN on URN 1" in pending /*{
     val  il1_1 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
     val relationSet = CiteRelationSet("src/test/resources/venA-Iliad-1.tsv")

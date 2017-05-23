@@ -26,7 +26,19 @@ case class CiteRelationSet (relations: Set[CiteTriple]) {
 
 }
 
+
 object CiteRelationSet {
+
+  /** Create set from CEX source string.
+  *
+  * @param cexSrc Source data in CEX format.
+  */
+  def apply(cexSrc: String, separator: String = "#"): CiteRelationSet = {
+    val lns = cexSrc.split("\n").toVector.map(_.split(separator))
+    val relations = lns.map(v => CiteTriple(urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2))) )
+    CiteRelationSet(relations.toSet)
+  }
+/*
 
   def apply(f: String, separator: String = "\t"): CiteRelationSet = {
     val stringPairs = Source.fromFile(f).getLines.toVector.map(_.split(separator))
@@ -34,7 +46,7 @@ object CiteRelationSet {
     val relations = stringPairs.tail.map( arr => CiteTriple(urnFromString(arr(0)), Cite2Urn(arr(1)), urnFromString(arr(2))) )
     CiteRelationSet(relations.toSet)
   }
-
+*/
 
 
 
