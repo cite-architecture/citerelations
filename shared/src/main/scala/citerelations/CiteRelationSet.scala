@@ -7,8 +7,21 @@ import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
 
 
-case class CiteRelationSet (relations: Set[CiteTriple]) {
+import scala.scalajs.js
+import js.annotation.JSExport
 
+
+@JSExport case class CiteRelationSet (relations: Set[CiteTriple]) {
+
+
+  /** Filter set for verb URN matching a given URN.
+  *
+  * @param u CITE2 URN to match.
+  */
+  def verb(verbUrn: Cite2Urn): CiteRelationSet = {
+    val matchingRelations = relations.filter(_.verbMatch(verbUrn))
+      CiteRelationSet(matchingRelations)
+  }
 
   /** Find number of relations in set.
   */
@@ -58,9 +71,34 @@ object CiteRelationSet {
   * @param cexSrc Source data in CEX format.
   */
   def apply(cexSrc: String, separator: String = "#"): CiteRelationSet = {
-    val lns = cexSrc.split("\n").toVector.map(_.split(separator))
-    val relations = lns.map(v => CiteTriple(urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2))) )
+    val lns = cexSrc.split("\n").toVector.map(_.split(separator).toVector)
+    println("PROCESS " + lns)
+    val relations = lns.map(v => {
+      println("Convert " + v)
+      println("SUBJ = " + urnFromString(v(0)))
+      println("OBJ = " + urnFromString(v(2)))
+      println("VERB = " + Cite2Urn(v(1)))
+      val triple =      CiteTriple(CiteRelationSet.urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2)))
+      println("Yielding triple " + triple)
+      triple
+   } )
     CiteRelationSet(relations.toSet)
+  }
+
+
+  /** Create appropriately typed URN object from String
+  * value.
+  *
+  * @param s String value of either a CtsUrn or Cite2Urn.
+  */
+  def urnFromString(s: String) : Urn = {
+    if (s.startsWith("urn:cite2:")) {
+      Cite2Urn(s)
+    } else if (s.startsWith("urn:cts:")) {
+      CtsUrn(s)
+    } else {
+      throw(CiteRelationException(s + " is not a URN value."))
+    }
   }
 
 
