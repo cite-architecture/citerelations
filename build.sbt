@@ -23,7 +23,7 @@ lazy val crossed = crossProject.in(file(".")).
       libraryDependencies ++= Seq(
         "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided",
         "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
-
+        "edu.holycross.shot" %%% "cex" % "3.0.0",
         "edu.holycross.shot.cite" %%% "xcite" % "2.3.2"
       )
     ).

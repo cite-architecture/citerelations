@@ -1,6 +1,7 @@
 package edu.holycross.shot.citerelation
 
 import edu.holycross.shot.cite._
+import edu.holycross.shot.cex._
 
 
 import scala.io.Source
@@ -70,9 +71,15 @@ object CiteRelationSet {
   *
   * @param cexSrc Source data in CEX format.
   */
-  def apply(cexSrc: String, separator: String = "#"): CiteRelationSet = {
-    val lns = cexSrc.split("\n").toVector.map(_.split(separator).toVector)
-    val relations = lns.map(v => {
+  def apply(cexSrc: String, separator: String = "#", secondarySep: String = ","): CiteRelationSet = {
+    val cex = CexParser(cexSrc)
+    // THIS SHOULD BE DONE BY PARSER block fUNCTION:
+    val lns = cex.block("relations").flatMap(_.split("\n")).filter(_.nonEmpty).toVector
+
+
+
+    val colsByLine = lns.map(_.split(separator).toVector)
+    val relations = colsByLine.map(v => {
       val triple =      CiteTriple(CiteRelationSet.urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2)))
       triple
    } )
