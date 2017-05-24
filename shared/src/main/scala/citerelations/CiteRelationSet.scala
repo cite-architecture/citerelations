@@ -72,14 +72,8 @@ object CiteRelationSet {
   */
   def apply(cexSrc: String, separator: String = "#"): CiteRelationSet = {
     val lns = cexSrc.split("\n").toVector.map(_.split(separator).toVector)
-    println("PROCESS " + lns)
     val relations = lns.map(v => {
-      println("Convert " + v)
-      println("SUBJ = " + urnFromString(v(0)))
-      println("OBJ = " + urnFromString(v(2)))
-      println("VERB = " + Cite2Urn(v(1)))
       val triple =      CiteTriple(CiteRelationSet.urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2)))
-      println("Yielding triple " + triple)
       triple
    } )
     CiteRelationSet(relations.toSet)
