@@ -73,8 +73,11 @@ object CiteRelationSet {
   */
   def apply(cexSrc: String, separator: String = "#", secondarySep: String = ","): CiteRelationSet = {
     val cex = CexParser(cexSrc)
+
+
+
     // THIS SHOULD BE DONE BY PARSER block fUNCTION:
-    val lns = cex.block("relations").flatMap(_.split("\n")).filter(_.nonEmpty).toVector
+    val lns = cex.blockString("relations").split("\n").toVector
 
 
 
