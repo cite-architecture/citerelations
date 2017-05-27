@@ -58,7 +58,7 @@ import js.annotation.JSExport
   }
 
 
-  /** True if either "verb" URN matches a
+  /** True if "verb" URN matches a
   * a given URN.
   *
   * @param urn URN to match.
