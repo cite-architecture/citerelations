@@ -22,7 +22,7 @@ class RelationMatchingSpec extends FlatSpec {
     assert (triple.urn1Match(msAiliad))
   }
 
-  it should "match a Cite2Urn in the first Urn" in {
+  it should "match a CITE2 URN in the first Urn" in {
     val il1_1 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
     val img = Cite2Urn("urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901")
 
@@ -32,6 +32,13 @@ class RelationMatchingSpec extends FlatSpec {
     assert (triple.urn1Match(matchImg))
   }
 
+
+  it should "match a CTS URN in the second Urn" in pending
+
+  it should "match a CITE2 URN in the second Urn" in pending
+
+
+  it should "match either side from a CTS URN" in pending
 
   it should "match either side from a Cite2 URN" in {
     val il1_1 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
@@ -43,21 +50,6 @@ class RelationMatchingSpec extends FlatSpec {
     assert (triple ~~ matchImg)
   }
 
+  it should "match the verb" in pending
 
-// Loading from file is JVM specifics
-  it should "filter a relation set by CTS URN on URN 1" in pending /*{
-    val  il1_1 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
-    val relationSet = CiteRelationSet("src/test/resources/venA-Iliad-1.tsv")
-    val filtered = relationSet.urn1Match(il1_1)
-    assert (filtered.relations.size == 1)
-  }
-
-  it should "filter a relations set by CTS URN on either URN" in {
-    val  il1_1 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
-    val relationSet = CiteRelationSet("src/test/resources/venA-Iliad-1.tsv")
-    val filtered = relationSet.relations.filter(_.urnMatch(il1_1))
-    assert (filtered.size == 1)
-  }
-
-*/
 }

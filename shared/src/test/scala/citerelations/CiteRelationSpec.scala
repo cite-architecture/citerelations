@@ -27,4 +27,13 @@ urn:cts:greekLit:tlg0012.tlg001.msA:1.1#urn:cite2:cite:dseverbs.r1:illustratedBy
 
 
 
+    it should "filter a relation set by CTS URN on URN 1" in pending
+    it should "filter a relation set by CITE2 URN on URN 1" in pending
+
+
+    it should "filter a relation set by CTS URN on URN 2" in pending
+    it should "filter a relation set by CITE2 URN on URN 2" in pending
+
+    it should "fiter a relation set by verb URN" in pending
+
 }
