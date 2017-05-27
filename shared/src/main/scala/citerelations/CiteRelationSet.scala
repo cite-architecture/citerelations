@@ -20,7 +20,7 @@ import js.annotation.JSExport
   * @param u CITE2 URN to match.
   */
   def verb(verbUrn: Cite2Urn): CiteRelationSet = {
-    val matchingRelations = relations.filter(_.verbMatch(verbUrn))
+    val matchingRelations = relations.filter(_.verb(verbUrn))
       CiteRelationSet(matchingRelations)
   }
 

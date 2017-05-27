@@ -63,7 +63,7 @@ import js.annotation.JSExport
   *
   * @param urn URN to match.
   */
-  def verbMatch (verb: Cite2Urn): Boolean = {
+  def verb (verb: Cite2Urn): Boolean = {
     relation ~~ verb
   }
 

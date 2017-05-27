@@ -68,7 +68,7 @@ class RelationMatchingSpec extends FlatSpec {
   it should "match the verb" in {
     val triple = CiteTriple(pg12, illustratedBy, img)
     val dseClass = Cite2Urn("urn:cite2:cite:dseverbs:")
-    assert(triple.verbMatch(dseClass))
+    assert(triple.verb(dseClass))
   }
 
 }
