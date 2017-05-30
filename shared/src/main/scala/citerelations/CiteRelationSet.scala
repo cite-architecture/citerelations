@@ -14,6 +14,10 @@ import js.annotation.JSExport
 
 @JSExport case class CiteRelationSet (relations: Set[CiteTriple]) {
 
+  /** True if relations set is empty.*/
+  def isEmpty: Boolean = {
+    (relations.size == 0)
+  }
 
   /** Filter set for verb URN matching a given URN.
   *
@@ -73,21 +77,20 @@ object CiteRelationSet {
   */
   def apply(cexSrc: String, separator: String = "#"): CiteRelationSet = {
     val cex = CexParser(cexSrc)
-    println("Parsed cex")
-    val lns = cex.blockString("relations").split("\n").toVector
+    val lns = cex.blockString("relations").split("\n").toVector.filter(_.nonEmpty)
 
 
-
-    val colsByLine = lns.map(_.split(separator).toVector)
-
+    val colsByLine = lns.map(_.split(separator).toVector.filter(_.size > 0))
+    //println(s"colsbyline: SIZE = ${colsByLine.size}")
+    //println("\t" + colsByLine)
     val relations = colsByLine.map(v => {
-      println("RAW: " + v)
-      println("V0 -> " + CiteRelationSet.urnFromString(v(0)))
       val triple =  CiteTriple(CiteRelationSet.urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2)))
-      println("\t=" + triple)
-      triple
-   } )
-    CiteRelationSet(relations.toSet)
+      triple   } )
+    if (relations.size > 0) {
+      CiteRelationSet(relations.toSet)
+    } else {
+      CiteRelationSet(Set[CiteTriple]())
+    }
   }
 
 
@@ -98,7 +101,6 @@ object CiteRelationSet {
   */
   def urnFromString(s: String) : Urn = {
     if (s.startsWith("urn:cite2:")) {
-      println("CONVERT " + s)
       Cite2Urn(s)
     } else if (s.startsWith("urn:cts:")) {
       CtsUrn(s)
