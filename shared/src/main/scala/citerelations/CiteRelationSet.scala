@@ -71,19 +71,20 @@ object CiteRelationSet {
   *
   * @param cexSrc Source data in CEX format.
   */
-  def apply(cexSrc: String, separator: String = "#", secondarySep: String = ","): CiteRelationSet = {
+  def apply(cexSrc: String, separator: String = "#"): CiteRelationSet = {
     val cex = CexParser(cexSrc)
-
-
-
-    // THIS SHOULD BE DONE BY PARSER block fUNCTION:
+    println("Parsed cex")
     val lns = cex.blockString("relations").split("\n").toVector
 
 
 
     val colsByLine = lns.map(_.split(separator).toVector)
+
     val relations = colsByLine.map(v => {
-      val triple =      CiteTriple(CiteRelationSet.urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2)))
+      println("RAW: " + v)
+      println("V0 -> " + CiteRelationSet.urnFromString(v(0)))
+      val triple =  CiteTriple(CiteRelationSet.urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2)))
+      println("\t=" + triple)
       triple
    } )
     CiteRelationSet(relations.toSet)
@@ -97,6 +98,7 @@ object CiteRelationSet {
   */
   def urnFromString(s: String) : Urn = {
     if (s.startsWith("urn:cite2:")) {
+      println("CONVERT " + s)
       Cite2Urn(s)
     } else if (s.startsWith("urn:cts:")) {
       CtsUrn(s)
