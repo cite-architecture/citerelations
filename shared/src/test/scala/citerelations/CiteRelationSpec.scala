@@ -12,15 +12,29 @@ val cexSrc = """
 
 #  SVO triplets :
 
-
+#Iliad 1.1
 urn:cts:greekLit:tlg0012.tlg001.msA:1.1#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901
 urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901#urn:cite2:cite:dseverbs.r1:illustrates#urn:cts:greekLit:tlg0012.tlg001.msA:1.1
 
+#Iliad 2.1
+urn:cts:greekLit:tlg0012.tlg001.msA:2.1#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012VN_0514@0.4956,0.2191,0.3254,0.02158
+urn:cite2:hmt:vaimg.r1:VA012VN_0514@0.4956,0.2191,0.3254,0.02158#urn:cite2:cite:dseverbs.r1:illustrates#urn:cts:greekLit:tlg0012.tlg001.msA:2.1
+
+#MS 12r
 urn:cite2:hmt:msA.r1:12r#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012RN_0013
 urn:cite2:hmt:vaimg.r1:VA012RN_0013#urn:cite2:cite:dseverbs.r1:illustrates#urn:cite2:hmt:msA.r1:12r
 
+#MS 12v
+urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012VN_0514
+urn:cite2:hmt:vaimg.r1:VA012VN_0514#urn:cite2:cite:dseverbs.r1:illustrates#urn:cite2:hmt:msA.r1:12v
+
+#Iliad 1.1 + MS 12r
 urn:cts:greekLit:tlg0012.tlg001.msA:1.1#urn:cite2:cite:dseverbs.r1:appearsOn#urn:cite2:hmt:msA.r1:12r
 urn:cite2:hmt:msA.r1:12r#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg0012.tlg001.msA:1.1
+
+#Iliad 2.1 + MS 12v
+urn:cts:greekLit:tlg0012.tlg001.msA:2.1#urn:cite2:cite:dseverbs.r1:appearsOn#urn:cite2:hmt:msA.r1:12v
+urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg0012.tlg001.msA:2.1
 """
 
   val relations = CiteRelationSet(cexSrc)
@@ -37,7 +51,7 @@ urn:cite2:hmt:msA.r1:12r#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
 
     relations match {
       // 3 symmetrical pairs:
-      case crset: CiteRelationSet => assert(crset.size == 6)
+      case crset: CiteRelationSet => assert(crset.size == 12)
       case _ => fail("Should have created CiteRelationSet")
     }
   }
@@ -87,7 +101,7 @@ urn:cite2:hmt:msA.r1:12r#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
 
   it should "fiter a relation set by verb URN" in {
     val filtered = relations.verb(dseverbs)
-    assert(filtered.size == 6)
+    assert(filtered.size == 12)
   }
 
 
