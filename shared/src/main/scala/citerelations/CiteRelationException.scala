@@ -2,9 +2,9 @@ package edu.holycross.shot
 package citerelation {
 
 import scala.scalajs.js
-import js.annotation.JSExport
+import scala.scalajs.js.annotation._
 
-@JSExport  case class CiteRelationException(message: String = "", cause: Option[Throwable] = None) extends Exception(message) {
+@JSExportAll  case class CiteRelationException(message: String = "", cause: Option[Throwable] = None) extends Exception(message) {
     cause.foreach(initCause)
   }
 

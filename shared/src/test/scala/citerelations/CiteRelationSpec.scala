@@ -10,29 +10,29 @@ class CiteRelationSpec extends FlatSpec {
 val cexSrc = """
 #!relations
 
-#  SVO triplets :
+//  SVO triplets :
 
-#Iliad 1.1
+// Iliad 1.1
 urn:cts:greekLit:tlg0012.tlg001.msA:1.1#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901
 urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901#urn:cite2:cite:dseverbs.r1:illustrates#urn:cts:greekLit:tlg0012.tlg001.msA:1.1
 
-#Iliad 2.1
+// Iliad 2.1
 urn:cts:greekLit:tlg0012.tlg001.msA:2.1#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012VN_0514@0.4956,0.2191,0.3254,0.02158
 urn:cite2:hmt:vaimg.r1:VA012VN_0514@0.4956,0.2191,0.3254,0.02158#urn:cite2:cite:dseverbs.r1:illustrates#urn:cts:greekLit:tlg0012.tlg001.msA:2.1
 
-#MS 12r
+// MS 12r
 urn:cite2:hmt:msA.r1:12r#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012RN_0013
 urn:cite2:hmt:vaimg.r1:VA012RN_0013#urn:cite2:cite:dseverbs.r1:illustrates#urn:cite2:hmt:msA.r1:12r
 
-#MS 12v
+// MS 12v
 urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012VN_0514
 urn:cite2:hmt:vaimg.r1:VA012VN_0514#urn:cite2:cite:dseverbs.r1:illustrates#urn:cite2:hmt:msA.r1:12v
 
-#Iliad 1.1 + MS 12r
+// Iliad 1.1 + MS 12r
 urn:cts:greekLit:tlg0012.tlg001.msA:1.1#urn:cite2:cite:dseverbs.r1:appearsOn#urn:cite2:hmt:msA.r1:12r
 urn:cite2:hmt:msA.r1:12r#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg0012.tlg001.msA:1.1
 
-#Iliad 2.1 + MS 12v
+// Iliad 2.1 + MS 12v
 urn:cts:greekLit:tlg0012.tlg001.msA:2.1#urn:cite2:cite:dseverbs.r1:appearsOn#urn:cite2:hmt:msA.r1:12v
 urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg0012.tlg001.msA:2.1
 """
@@ -41,7 +41,7 @@ urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
 
 
   // Query on notional versions of same objects:
-  val msAiliad = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
+  val msAiliad = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:")
   val matchPage = Cite2Urn("urn:cite2:hmt:msA:12r")
   val matchImg = Cite2Urn("urn:cite2:hmt:vaimg:VA012RN_0013")
 
@@ -58,23 +58,25 @@ urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
 
 
 
-  it should "filter a relation set by CTS URN on URN 1" in {
+
+  it should "filter a relation set by an unspecified CTS URN on URN 1" in
+   pending /*{
     val filtered = relations.urn1Match(msAiliad)
     assert(filtered.size == 2)
-  }
-  it should "filter a relation set by CITE2 URN on URN 1" in {
+  }*/
+  it should "filter a relation set by CITE2 URN on URN 1" in pending /* {
     val filteredPage = relations.urn1Match(matchPage)
     assert(filteredPage.size == 2)
 
     val filteredImage = relations.urn1Match(matchImg)
     assert(filteredImage.size == 2)
-  }
+  } */
 
 
-  it should "filter a relation set by CTS URN on URN 2" in {
+  it should "filter a relation set by CTS URN on URN 2" in pending /*{
     val filtered = relations.urn2Match(msAiliad)
     assert(filtered.size == 2)
-  }
+  }*/
   it should "filter a relation set by CITE2 URN on URN 2" in {
 
     val filteredPage = relations.urn2Match(matchPage)
@@ -85,11 +87,11 @@ urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
   }
 
 
-  it should "filter a relation set by CTS URN on either URN" in {
+  it should "filter a relation set by CTS URN on either URN" in pending /* {
     val filtered = relations ~~ msAiliad
     assert(filtered.size == 4)
 
-  }
+  } */
   it should "filter a relation set by CITE2 URN on either URN" in {
     val filteredPage = relations ~~ matchPage
     assert(filteredPage.size == 4)

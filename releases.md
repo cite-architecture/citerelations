@@ -1,5 +1,7 @@
 # `citerelations`: release notes
 
+**2.0.0**:  API-breaking upgrade to support CEX 3.0.
+
 **1.1.1**:  Fixes a bug in handling empty data blocks.
 
 **1.1.0**: Support full CEX format in constructing `CiteRelationSet`.
