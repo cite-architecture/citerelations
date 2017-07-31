@@ -57,26 +57,23 @@ urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
   }
 
 
-
-
-  it should "filter a relation set by an unspecified CTS URN on URN 1" in
-   pending /*{
+  it should "filter a relation set by an unspecified CTS URN on URN 1" in {
     val filtered = relations.urn1Match(msAiliad)
-    assert(filtered.size == 2)
-  }*/
-  it should "filter a relation set by CITE2 URN on URN 1" in pending /* {
+    assert(filtered.size == 4)
+  }
+  it should "filter a relation set by CITE2 URN on URN 1" in  {
     val filteredPage = relations.urn1Match(matchPage)
     assert(filteredPage.size == 2)
 
     val filteredImage = relations.urn1Match(matchImg)
     assert(filteredImage.size == 2)
-  } */
+  }
 
 
-  it should "filter a relation set by CTS URN on URN 2" in pending /*{
+  it should "filter a relation set by CTS URN on URN 2" in {
     val filtered = relations.urn2Match(msAiliad)
-    assert(filtered.size == 2)
-  }*/
+    assert(filtered.size == 4)
+  }
   it should "filter a relation set by CITE2 URN on URN 2" in {
 
     val filteredPage = relations.urn2Match(matchPage)
@@ -87,11 +84,11 @@ urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
   }
 
 
-  it should "filter a relation set by CTS URN on either URN" in pending /* {
+  it should "filter a relation set by CTS URN on either URN" in {
     val filtered = relations ~~ msAiliad
-    assert(filtered.size == 4)
+    assert(filtered.size == 8)
 
-  } */
+  }
   it should "filter a relation set by CITE2 URN on either URN" in {
     val filteredPage = relations ~~ matchPage
     assert(filteredPage.size == 4)
@@ -105,9 +102,6 @@ urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
     val filtered = relations.verb(dseverbs)
     assert(filtered.size == 12)
   }
-
-
-
 
 
 }
