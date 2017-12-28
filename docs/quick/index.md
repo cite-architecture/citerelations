@@ -4,9 +4,104 @@ title: Quick start
 ---
 
 
+## Create a `CiteRelationSet`
+
 Import the package:
 
 ```scala
-scala> import edu.holycross.shot.citerelation._
 import edu.holycross.shot.citerelation._
+```
+
+Create a `CiteRelationSet` from a `String` in CEX format:
+
+```scala
+val cex = """
+#!relations
+// Subject#Relation#Object
+urn:cts:greekLit:tlg0012.tlg001.msA:1.title#urn:cite2:dse:verbs.v1:appears_on#urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.2022,0.211,0.1732,0.0203
+// etc, etc, etc
+"""
+val relationSet = CiteRelationSet(cex)
+```
+
+
+
+
+
+## Query the relations
+
+You'll need to import the `cite` library to work with URNs.
+
+
+```scala
+import edu.holycross.shot.cite._
+```
+
+The following examples use an index mapping 611 lines of the *Iliad* to an image's region of interest.
+
+
+### Find all relations of a given type
+
+```scala
+val relation = Cite2Urn("urn:cite2:dse:verbs.v1:appears_on")
+val triples = relationSet.verb(relation)
+// 611 lines indexed in this data set:
+assert(triples.size == 611)
+```
+
+
+
+### Find all relations of a given subject
+
+```scala
+val psg = CtsUrn("urn:cts:greekLit:tlg0012.tlg001:1.600")
+val triples = relationSet.urn1Match(psg)
+// Line appears on one page:
+assert(triples.size == 1)
+```
+
+
+### Find all relations of a given Object
+
+
+```scala
+val img = Cite2Urn("urn:cite2:hmt:vaimg.r1:VA023VN_0525")
+val triples = relationSet.urn2Match(img)
+// 25 lines on a page:
+assert(triples.size == 25)
+```
+
+
+### Chain results
+
+```scala
+val triples = relationSet.verb(relation).urn1Match(psg)
+```
+
+
+### Working relation sets
+
+A `CiteRelationSet` has a `relations` member that is a set of triples.
+
+
+```scala
+val tripleSet = triples.relations
+```
+
+Each triple has a subject, verb and object.
+
+```scala
+scala> // arbitrarily select a triple from the set and
+     | // look at its three parts
+     | val oneTriple = tripleSet.toSeq(0)
+oneTriple: edu.holycross.shot.citerelation.CiteTriple = CiteTriple(urn:cts:greekLit:tlg0012.tlg001.msA:1.600,urn:cite2:dse:verbs.v1:appears_on,urn:cite2:hmt:vaimg.r1:VA023VN_0525@0.497,0.6461,0.363,0.0316)
+
+scala> oneTriple.urn1
+res9: edu.holycross.shot.cite.Urn = urn:cts:greekLit:tlg0012.tlg001.msA:1.600
+
+scala> oneTriple.relation
+res10: edu.holycross.shot.cite.Cite2Urn = urn:cite2:dse:verbs.v1:appears_on
+
+scala> oneTriple.urn2
+res11: edu.holycross.shot.cite.Urn = urn:cite2:hmt:vaimg.r1:VA023VN_0525@0.497,0.6461,0.363,0.0316
 ```
