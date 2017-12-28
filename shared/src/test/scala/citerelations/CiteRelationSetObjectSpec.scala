@@ -17,7 +17,7 @@ class CiteRelationSetObjectSpec extends FlatSpec {
     val cexSrc = """
 #!relations
 
-# Note that block can include contents, and blank lines to improve human legibility:
+// Note that block can include contents, and blank lines to improve human legibility:
 
 urn:cts:greekLit:tlg0012.tlg001.msA:1.1#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901
 urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901#urn:cite2:cite:dseverbs.r1:illustrates#urn:cts:greekLit:tlg0012.tlg001.msA:1.1
@@ -53,9 +53,9 @@ urn#urn:cite2:dse:demo.2017a:va12r
 license#public domain
 
 #!relations
-#
-# Empty block: comments and blank lines, but
-# no content lines.
+//
+// Empty block: comments and blank lines, but
+// no content lines.
 
 
 """

@@ -9,10 +9,10 @@ import scala.collection.mutable.ArrayBuffer
 
 
 import scala.scalajs.js
-import js.annotation.JSExport
+import scala.scalajs.js.annotation._
 
 
-@JSExport case class CiteRelationSet (relations: Set[CiteTriple]) {
+@JSExportAll case class CiteRelationSet (relations: Set[CiteTriple]) {
 
   /** True if relations set is empty.*/
   def isEmpty: Boolean = {
@@ -33,6 +33,7 @@ import js.annotation.JSExport
   def size: Int = {
     relations.size
   }
+
 
   /** Filter set for subject URN matching a given URN.
   *
@@ -79,13 +80,17 @@ object CiteRelationSet {
     val cex = CexParser(cexSrc)
     val lns = cex.blockString("relations").split("\n").toVector.filter(_.nonEmpty)
 
+    val relations = lns.map(CiteTriple(_))
 
-    val colsByLine = lns.map(_.split(separator).toVector.filter(_.size > 0))
+    /*val colsByLine = lns.map(_.split(separator).toVector.filter(_.size > 0))
     //println(s"colsbyline: SIZE = ${colsByLine.size}")
     //println("\t" + colsByLine)
-    val relations = colsByLine.map(v => {
+
+      {
+
       val triple =  CiteTriple(CiteRelationSet.urnFromString(v(0)), Cite2Urn(v(1)), urnFromString(v(2)))
-      triple   } )
+      triple   } )*/
+
     if (relations.size > 0) {
       CiteRelationSet(relations.toSet)
     } else {

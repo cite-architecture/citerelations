@@ -7,10 +7,57 @@ import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
 
 import scala.scalajs.js
-import js.annotation.JSExport
+import scala.scalajs.js.annotation._
 
 
-@JSExport case class CiteTriple(urn1: Urn, relation: Cite2Urn, urn2: Urn) {
+@JSExportAll case class CiteTriple(urn1: Urn, relation: Cite2Urn, urn2: Urn) {
+
+
+  /** True if "subject" matches a given CTS URN.
+  *
+  * @param urn A CtsUrn to compare to the subject of this relation.
+  */
+  def ctsUrn1Match(urn: CtsUrn): Boolean = {
+    urn1 match {
+      case cts: CtsUrn => cts ~~ urn
+      case _ => false
+    }
+  }
+
+
+  /** True if "object" matches a given CTS URN.
+  *
+  * @param urn A CtsUrn to compare to the subject of this relation.
+  */
+  def ctsUrn2Match(urn: CtsUrn): Boolean = {
+    urn2 match {
+      case cts: CtsUrn => cts ~~ urn
+      case _ => false
+    }
+  }
+
+  /** True if "subject" matches a given CITE2 URN.
+  *
+  * @param urn A Cite2Urn to compare to the subject of this relation.
+  */
+  def citeUrn1Match(urn: Cite2Urn): Boolean = {
+    urn1 match {
+      case cite2: Cite2Urn => cite2 ~~ urn
+      case _ => false
+    }
+  }
+
+  /** True if "object" matches a given CITE2 URN.
+  *
+  * @param urn A Cite2Urn to compare to the subject of this relation.
+  */
+  def citeUrn2Match(urn: Cite2Urn): Boolean = {
+    urn2 match {
+      case cite2: Cite2Urn => cite2 ~~ urn
+      case _ => false
+    }
+  }
+
 
   /** True if "subject" matches a given URN (CTS or CITE2 URN).
   *
@@ -19,17 +66,10 @@ import js.annotation.JSExport
   def urn1Match (urn: Urn): Boolean = {
     urn match {
       case cts: CtsUrn => {
-        urn1 match {
-          case cts: CtsUrn =>  cts ~~ urn1
-          case _ => false
-        }
-
+        ctsUrn1Match(cts)
       }
       case c2: Cite2Urn =>  {
-        urn1 match {
-          case cite: Cite2Urn => c2 ~~ urn1
-          case _ => false
-        }
+        citeUrn1Match(c2)
       }
     }
   }
@@ -76,4 +116,24 @@ import js.annotation.JSExport
     (urn1Match(urn) || urn2Match(urn))
   }
 
+}
+
+
+/** Factory object for creating [[CiteTriple]]s from CEX source.
+*/
+object CiteTriple {
+
+  /** Create a CiteTriple from a single line of delimited text.
+  *
+  * @param cex CEX description of a single CITE relation.
+  * @param delimiter Delimiting string separating S-V-O.
+  */
+  def apply(cex: String, delimiter: String = "#"): CiteTriple = {
+    val columns = cex.split(delimiter)
+    columns.size match {
+      case 3 =>   CiteTriple(CiteRelationSet.urnFromString(columns(0)), Cite2Urn(columns(1)), CiteRelationSet.urnFromString(columns(2)))
+      case _ => throw new CiteRelationException(s"Wrong number of columns in ${cex}")
+    }
+
+  }
 }
