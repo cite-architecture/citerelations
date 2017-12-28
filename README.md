@@ -14,6 +14,10 @@ Status:  in active development.  See [release notes](releases.md)
 [GPL 3.0](https://opensource.org/licenses/gpl-3.0.html)
 
 
+## Documentation
+
+See <https://cite-architecture.github.io/citerelations/>.
+
 ## Using, building, testing
 
 `citerelations` is compiled for both the JVM and ScalaJS using scala versions 2.10, 2.11 and 2.12.
