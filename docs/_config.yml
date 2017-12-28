@@ -1,0 +1,26 @@
+# Dependencies
+
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            'CITE relations'
+tagline:          ''
+description:      ''
+baseurl: '/citerelations/'
+
+
+
+author:
+  name:           'Neel Smith'
+
+paginate:         5
+
+links:
+  - title: CITE Architecture home
+    url: https://cite-architecture.github.io/
+    external: true
+  - title: Github repository
+    url: https://github.com/cite-architecture/citerelations
+    external: true
