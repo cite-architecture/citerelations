@@ -1,5 +1,10 @@
 # `citerelations`: release notes
 
+
+
+**2.0.2**:  Incorporate bug fixes in library dependencies.
+
+
 **2.0.1**:  Incorporate bug fixes in library dependencies.
 
 **2.0.0**:  API-breaking upgrade to support CEX 3.0.

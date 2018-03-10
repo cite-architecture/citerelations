@@ -5,7 +5,7 @@
 
 `citerelations` is a cross-platform library for working with sets of triples describing relations among citable objects.
 
-## Current version: 2.0.1
+## Current version: 2.0.2
 
 Status:  in active development.  See [release notes](releases.md)
 
