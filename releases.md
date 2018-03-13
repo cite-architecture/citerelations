@@ -1,6 +1,6 @@
 # `citerelations`: release notes
 
-
+**2.0.3**:  Bug fix in update to `cex` parser.
 
 **2.0.2**:  Incorporate bug fixes in library dependencies.
 
