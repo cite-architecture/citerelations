@@ -80,19 +80,12 @@ import scala.scalajs.js.annotation._
   * @param urn URN to match.
   */
   def urn2Match (urn: Urn): Boolean = {
-    urn match {
+     urn match {
       case cts: CtsUrn => {
-        urn2 match {
-          case cts: CtsUrn =>  cts ~~ urn2
-          case _ => false
-        }
-
+        ctsUrn2Match(cts)
       }
       case c2: Cite2Urn =>  {
-        urn2 match {
-          case cite: Cite2Urn => c2 ~~ urn2
-          case _ => false
-        }
+        citeUrn2Match(c2)
       }
     }
   }

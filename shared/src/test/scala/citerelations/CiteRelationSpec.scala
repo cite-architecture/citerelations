@@ -46,6 +46,7 @@ urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
   val matchImg = Cite2Urn("urn:cite2:hmt:vaimg:VA012RN_0013")
 
   val dseverbs = Cite2Urn("urn:cite2:cite:dseverbs:")
+  val hasonit = Cite2Urn("urn:cite2:cite:dseverbs.r1:hasOnIt")
 
   "A CITE relation set" should "offer a constructor signature for instantiating a corpus from a CEX text source" in  {
 
@@ -97,10 +98,14 @@ urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
     assert(filteredImage.size == 4)
   }
 
-
   it should "fiter a relation set by verb URN" in {
     val filtered = relations.verb(dseverbs)
     assert(filtered.size == 12)
+  }
+
+  it should "fiter a relation set by specific verb URN" in {
+    val filtered = relations.verb(hasonit)
+    assert(filtered.size == 2)
   }
 
 

@@ -17,8 +17,10 @@ class RelationMatchingSpec extends FlatSpec {
 
   // Related specific objects:
   val il1_1 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
+  val il1_2 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.2")
   val img = Cite2Urn("urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901")
   val pg12 = Cite2Urn("urn:cite2:hmt:msA.r1:12r")
+  val pg13 = Cite2Urn("urn:cite2:hmt:msA.r1:13r")
 
 
   // Notional versions of same objects:
@@ -69,6 +71,51 @@ class RelationMatchingSpec extends FlatSpec {
     val triple = CiteTriple(pg12, illustratedBy, img)
     val dseClass = Cite2Urn("urn:cite2:cite:dseverbs:")
     assert(triple.verb(dseClass))
+  }
+
+  it should "fail to match non-matching relations" in {
+    val triple = CiteTriple(il1_1, illustratedBy, pg12)
+    assert( !(triple ~~ il1_2) )
+  }
+
+  it should "filter a CiteRelationSet properly" in {
+
+    val cexSrc = """
+#!relations
+
+// Note that block can include contents, and blank lines to improve human legibility:
+
+urn:cts:greekLit:tlg0012.tlg001.msA:1.1#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901
+urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901#urn:cite2:cite:dseverbs.r1:illustrates#urn:cts:greekLit:tlg0012.tlg001.msA:1.1
+urn:cite2:hmt:msA.r1:12r#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012RN_0013
+urn:cite2:hmt:vaimg.r1:VA012RN_0013#urn:cite2:cite:dseverbs.r1:illustrates#urn:cite2:hmt:msA.r1:12r
+urn:cts:greekLit:tlg0012.tlg001.msA:1.1#urn:cite2:cite:dseverbs.r1:appearsOn#urn:cite2:hmt:msA.r1:12r
+urn:cite2:hmt:msA.r1:12r#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg0012.tlg001.msA:1.1
+"""
+    val relations = CiteRelationSet(cexSrc)
+    relations match {
+      case crs: CiteRelationSet => {
+        assert(crs.size == 6)
+      }
+      case _ => fail ("Should have created CiteRelationSet")
+    }
+
+    val filteredSet1:CiteRelationSet = relations ~~ il1_1 
+    assert (filteredSet1.size == 4) 
+    val filteredSet2:CiteRelationSet = relations ~~ il1_2 
+    assert (filteredSet2.size == 0) 
+
+  }
+
+  it should "get all of these right" in {
+    val u1 = Cite2Urn("urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.0611,0.2252,0.4675,0.0901")
+    val v = Cite2Urn("urn:cite2:cite:dseverbs.r1:illustrates")
+    val u2 = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
+    val ct:CiteTriple = CiteTriple(u1,v,u2)
+    val rct:CiteTriple = CiteTriple(u2,v,u1)
+    assert( !(ct.urn2Match(il1_2)))
+    assert( !(rct.urn1Match(il1_2)))  
+    //assert (ct ~~ il1_2)
   }
 
 }
