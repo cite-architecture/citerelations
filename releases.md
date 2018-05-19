@@ -1,5 +1,7 @@
 # `citerelations`: release notes
 
+**2.1.0**:  Added `[CiteRelationSet].verbs`, returning a `Set[CiteUrn]` listing the verbs represented in the CiteRelationSet.
+
 **2.0.4**:  Fixed Issue #6.
 
 **2.0.3**:  Bug fix in update to `cex` parser.

@@ -34,6 +34,13 @@ import scala.scalajs.js.annotation._
     relations.size
   }
 
+  /** Return a Set of CiteUrns representing all verbs
+  *
+  */
+  def verbs:Set[Cite2Urn] = {
+    this.relations.map(_.relation).toSet
+  }
+
 
   /** Filter set for subject URN matching a given URN.
   *
