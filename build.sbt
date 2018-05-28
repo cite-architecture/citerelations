@@ -1,4 +1,4 @@
-name := "Cross-compiled library for working with CITE relations"
+name := " CITE relations"
 
 
 crossScalaVersions in ThisBuild := Seq("2.10.6", "2.11.8", "2.12.4")
@@ -17,7 +17,7 @@ lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "citerelations",
       organization := "edu.holycross.shot",
-      version := "2.1.0",
+      version := "2.1.1",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
