@@ -1,5 +1,7 @@
 # `citerelations`: release notes
 
+**2.2.0**: New functionality in updated `xcite` library.
+
 **2.1.1**:  Modest change to build configuration.
 
 **2.1.0**:  Added `[CiteRelationSet].verbs`, returning a `Set[CiteUrn]` listing the verbs represented in the CiteRelationSet.
