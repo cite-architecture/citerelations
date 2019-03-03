@@ -1,5 +1,9 @@
 # `citerelations`: release notes
 
+
+**2.4.1**: Bug fixes in `xcite` library.
+
+
 **2.4.0**:  New functionality in updated `xcite` library.
 
 **2.3.0**:  New functionality in updated `xcite` library.
