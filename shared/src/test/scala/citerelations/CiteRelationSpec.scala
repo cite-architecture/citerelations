@@ -108,5 +108,18 @@ urn:cite2:hmt:msA.r1:12v#urn:cite2:cite:dseverbs.r1:hasOnIt#urn:cts:greekLit:tlg
     assert(filtered.size == 2)
   }
 
+  it should "serialize to CEX" in {
+    val cex = relations.cex()
+    val expected = cexSrc.split("\n").toVector.filter(_.nonEmpty).filterNot(_.startsWith("//")).mkString("\n")
+    println("\n\nActual: " + cex.size)
+    println(cex)
+    println("\n\nExpeted: " + expected.size)
+    println(expected)
+    val cexV = cex.split("\n").toVector.sorted
+    val expV = expected.split("\n").toVector.sorted
+    assert (cexV == expV)
+
+  }
+
 
 }

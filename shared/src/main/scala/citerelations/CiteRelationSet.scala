@@ -71,6 +71,13 @@ import scala.scalajs.js.annotation._
     CiteRelationSet(matchingRelations)
   }
 
+
+  def cex(delimiter: String = "#"): String = {
+    val hdr = "#!relations\n"
+    val rows = relations.toVector.map(_.cex(delimiter))
+    hdr + rows.mkString("\n")
+  }
+
 }
 
 

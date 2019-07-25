@@ -13,6 +13,10 @@ import scala.scalajs.js.annotation._
 @JSExportAll case class CiteTriple(urn1: Urn, relation: Cite2Urn, urn2: Urn) {
 
 
+  def cex(delimiter: String = "#"): String = {
+    s"${urn1}${delimiter}${relation}${delimiter}${urn2}"
+  }
+
   /** True if "subject" matches a given CTS URN.
   *
   * @param urn A CtsUrn to compare to the subject of this relation.

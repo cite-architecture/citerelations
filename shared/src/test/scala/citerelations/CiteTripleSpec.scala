@@ -99,5 +99,9 @@ class CiteTripleSpec extends FlatSpec {
 
   }
 
-
+  it should "generate a CEX string" in {
+    val srcCex = "urn:cts:greekLit:tlg0012.tlg001.msA:2.1#urn:cite2:cite:dseverbs.r1:appearsOn#urn:cite2:hmt:msA.r1:12v"
+    val triple = CiteTriple(srcCex)
+    assert(triple.cex() == srcCex)
+  }
 }
