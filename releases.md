@@ -1,5 +1,11 @@
 # `citerelations`: release notes
 
+
+**2.5.2**:  Really update `xcite` library.
+
+
+**2.5.1**:  Update `xcite` library.
+
 **2.5.0**  Add `cex` functions on `CiteTriple` and `CiteRelationSet`.
 
 **2.4.1**: Bug fixes in `xcite` library.
