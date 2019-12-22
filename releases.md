@@ -1,6 +1,8 @@
 # `citerelations`: release notes
 
 
+**2.6.0**:  Add logging with airframe library.
+
 **2.5.2**:  Really update `xcite` library.
 
 

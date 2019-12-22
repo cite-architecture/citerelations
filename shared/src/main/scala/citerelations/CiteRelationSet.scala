@@ -8,11 +8,16 @@ import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
 
 
+import wvlet.log._
+import wvlet.log.LogFormatter.SourceCodeLogFormatter
+
+
+
 import scala.scalajs.js
 import scala.scalajs.js.annotation._
 
 
-@JSExportAll case class CiteRelationSet (relations: Set[CiteTriple]) {
+@JSExportAll case class CiteRelationSet (relations: Set[CiteTriple]) extends LogSupport {
 
   /** True if relations set is empty.*/
   def isEmpty: Boolean = {
@@ -84,7 +89,7 @@ import scala.scalajs.js.annotation._
 /** Factory for creating [[CiteRelationSet]] from Source
 * data in CEX format.
 */
-object CiteRelationSet {
+object CiteRelationSet extends LogSupport {
 
   /** Create set from CEX source string.
   *
@@ -97,8 +102,8 @@ object CiteRelationSet {
     val relations = lns.map(CiteTriple(_))
 
     /*val colsByLine = lns.map(_.split(separator).toVector.filter(_.size > 0))
-    //println(s"colsbyline: SIZE = ${colsByLine.size}")
-    //println("\t" + colsByLine)
+    //debug(s"colsbyline: SIZE = ${colsByLine.size}")
+    //debug("\t" + colsByLine)
 
       {
 

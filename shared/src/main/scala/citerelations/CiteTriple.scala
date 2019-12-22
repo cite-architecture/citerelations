@@ -6,6 +6,10 @@ import edu.holycross.shot.cite._
 import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
 
+
+import wvlet.log._
+import wvlet.log.LogFormatter.SourceCodeLogFormatter
+
 import scala.scalajs.js
 import scala.scalajs.js.annotation._
 
@@ -118,7 +122,7 @@ import scala.scalajs.js.annotation._
 
 /** Factory object for creating [[CiteTriple]]s from CEX source.
 */
-object CiteTriple {
+object CiteTriple extends LogSupport {
 
   /** Create a CiteTriple from a single line of delimited text.
   *
@@ -129,7 +133,11 @@ object CiteTriple {
     val columns = cex.split(delimiter)
     columns.size match {
       case 3 =>   CiteTriple(CiteRelationSet.urnFromString(columns(0)), Cite2Urn(columns(1)), CiteRelationSet.urnFromString(columns(2)))
-      case _ => throw new CiteRelationException(s"Wrong number of columns in ${cex}")
+      case _ => {
+        val msg = s"Wrong number of columns in ${cex}"
+        warn(msg)
+        throw new CiteRelationException(msg)
+      }
     }
 
   }
