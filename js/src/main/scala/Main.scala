@@ -2,11 +2,10 @@ package edu.holycross.shot.citerelation
 
 import edu.holycross.shot.cite._
 
-import scala.scalajs.js
 
 /** Verify that JS export works correctly. */
-object Main extends js.JSApp {
-  def main(): Unit = {
+object Main {
+  def main(args: Array[String]): Unit = {
     val cexSrc = """
 #!relations
 urn:cts:greekLit:tlg0012.tlg001.msA:1.title#urn:cite2:cite:dseverbs.r1:illustratedBy#urn:cite2:hmt:vaimg.r1:VA012RN_0013@0.2022,0.211,0.1732,0.0203
