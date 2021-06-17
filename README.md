@@ -5,7 +5,7 @@
 
 `citerelations` is a cross-platform library for working with sets of triples describing relations among citable objects.
 
-## Current version: 2.7.0
+## Current version: 2.7.1
 
 Status:  in active development.  See [release notes](releases.md)
 
@@ -22,12 +22,13 @@ See <https://cite-architecture.github.io/citerelations/>.
 
 `citerelations` is compiled for both the JVM and ScalaJS using scala versions 2.10, 2.11 and 2.12.
 
+Binaries for all three versions are available from the Nexus repository on <terracotta.hpcc.uh.edu/nexus>.
 
-Binaries for all platforms are available from jcenter.
+If you are using sbt, include `Resolver.jcenterRepo` in your list of resolvers
 
-If you are using sbt, include Resolver.jcenterRepo in your list of resolvers
-
-    resolvers += Resolver.jcenterRepo
+```scala
+	resolvers += "Nexus" at "https://terracotta.hpcc.uh.edu/nexus/repository/maven-releases/",
+```
 
 and add this to your library dependencies:
 

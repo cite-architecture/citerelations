@@ -1,5 +1,6 @@
 # `citerelations`: release notes
 
+**2.7.1**: Artifact published now at https://terracotta.hpcc.uh.edu/nexus/repository/maven-releases/
 
 **2.7.0**: Add support for SJS 1.0.0.
 
